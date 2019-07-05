@@ -1,5 +1,5 @@
 # Projet-8-Django
-Projet8 Openclassrooms, Pur Beurre full stack website, with OpenFoodFacts API
+Project 8 Openclassrooms, Pur Beurre full stack website, with OpenFoodFacts API
 
 Link project: https://github.com/Seiph59/Projet-8-Django
 URL address: https://pur-beurre001.herokuapp.com/
@@ -25,3 +25,5 @@ More informations on requirements.txt
 2. If you want to populate the db with foods, type: "python manage.py populate_db"
 
 3. For launch the app in local => python manage.py runserver
+
+4. Before to deploy your app, refer to 'TESTPLAN.md' file

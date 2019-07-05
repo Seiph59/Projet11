@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from accounts.forms import UserRegisterForm
 
 
-class FormTest(TestCase):
-    """ Class to do the tests  about the forms """
+class FormsTest(TestCase):
+    """ Class to do the tests about the forms """
 
     def setUp(self):
         """ method which define the parameter executed for each test """
