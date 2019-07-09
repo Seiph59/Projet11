@@ -51,7 +51,14 @@ class PopulateDbFromApi(TestCase):
         result = db.get_product_name(args)
         self.assertEqual(result, 'Coca Cola - 330 ml')
 
-    def test_populate_db_foods_added(self):
+    def test_get_product_name_no_french_name(self):
+        """Unit Test for the "get_product_name" class method"""
+        args = {'product_name': "Coca Cola - 330 ml"}
+        db = Database()
+        result = db.get_product_name(args)
+        self.assertEqual(result, 'Coca Cola - 330 ml')
+
+    def test_populate_db_foods_and_categories_added(self):
         """ Integration test to check that each food is correctly added
         in the database """
         with requests_mock.Mocker() as m:
@@ -59,13 +66,7 @@ class PopulateDbFromApi(TestCase):
             db = Database()
             db.populate()
         self.assertEqual(Food.objects.count(),3)
-
-    def test_populate_db_categories_added(self):
-        """ Integration test to check that each category is correctly added
-        in the database """
-        with requests_mock.Mocker() as m:
-            m.get('https://fr.openfoodfacts.org/cgi/search.pl', json=self.response_expected)
-            db = Database()
-            db.populate()
         self.assertEqual(Category.objects.count(), 27)
+
+
 
