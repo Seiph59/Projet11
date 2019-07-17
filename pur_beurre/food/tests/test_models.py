@@ -10,7 +10,7 @@ class FoodModelTest(TestCase):
 
     def setUp(self):
         """ Executed each test """
-        self.first_food = Food(pk=1,
+        self.first_food = Food.objects.create(pk=1,
                                name="test",
                                nutriscore="a",
                                url="www.off.com",
@@ -26,7 +26,7 @@ class FoodModelTest(TestCase):
                                last_modified=datetime(2015, 6, 15),
                                openff_id=125452)
 
-        self.user = User(pk=1,
+        self.user = User.objects.create(pk=1,
                          username="test",
                          first_name="Al",
                          last_name="taga",
@@ -36,17 +36,19 @@ class FoodModelTest(TestCase):
     def test_saving_and_retrieving_food(self):
         """ test to check if the food is well saved
         and able to retrieve it """
-        self.first_food.save()
         saved_food = Food.objects.all()
         self.assertEqual(saved_food.count(), 1)
 
     def test_link_favorite_food_to_user(self):
         """ Test to see if the favorite food for
         user works """
-        self.first_food.save()
-        self.user.save()
         food_selected = Food.objects.get(pk=1)
         user_selected = User.objects.get(pk=1)
         food_selected.favorite_users.add(user_selected)
         favorite_added = user_selected.favorite_foods.all()
         self.assertEqual(favorite_added.count(), 1)
+
+    def test_get_substitutes(self):
+        food = Food()
+        substitute_list, _, _ = food.get_substitute("test")
+        self.assertEqual(len(substitute_list), 1)
