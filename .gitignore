@@ -1,1 +1,4 @@
-env/
+envi/
+pur_beurre/staticfiles/
+pur_beurre/accounts/migrations/__pycache__/
+pur_beurre/welcome/migrations/__pycache__/

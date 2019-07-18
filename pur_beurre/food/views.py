@@ -19,12 +19,13 @@ def food_page(request, food_id):
 
 def get(request):
     """ dedicated for get methods """
-    food = Food()
     template_name = 'food/search_page.html'
     query = request.GET.get('search')
-    list = food.get_substitute(query)
+    list = Food.get_substitute(query)
     if list is False:
         return render(request, template_name, {'nofood': "Pas d'aliment trouvé"})
+    elif list is "error":
+        return render(request, template_name, {'no_substitute': "Votre aliment n'a pas de substitut"})
     substitutes_list = list[0]
     paginator = Paginator(substitutes_list, 6)
     page = request.GET.get('page')

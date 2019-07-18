@@ -27,7 +27,8 @@ class Food(models.Model):
     categories = models.ManyToManyField(Category)
     favorite_users = models.ManyToManyField(User, related_name="favorite_foods")
 
-    def get_substitute(self, product_name):
+    @staticmethod
+    def get_substitute(product_name):
         """ Method which find the substitute of
         the food requested """
         food_requested = Food.objects.filter(name__icontains=product_name)
@@ -36,6 +37,9 @@ class Food(models.Model):
         name_product = food_requested[0].name
         image = food_requested[0].url_picture
         categories = food_requested[0].categories.all()
+        if len(categories) == 0:
+            error= ["Pas d'aliment substitut"]
+            return [error, name_product, image]
         category_id = categories[0].id
         category_get = Category.objects.filter(pk=category_id)
         substitutes_ordered = category_get[0].food_set.all().order_by('nutriscore')
