@@ -5,5 +5,3 @@ Bienvenue {{ user.first_name }},
 Afin de confirmer votre compte, veuillez cliquer sur le lien ci-dessous:
 http://{{ domain }}{% url 'accounts:activate' uidb64=uid token=token %}
 {% endautoescape %}
-
-
