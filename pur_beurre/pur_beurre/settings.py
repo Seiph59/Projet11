@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import dj_database_url
 import django_heroku
+from .email_settings import HOST, PORT, HOST_USER, HOST_PASSWORD, USE_TLS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -162,3 +163,11 @@ if os.environ.get('ENV') == 'PRODUCTION':
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
+
+# Email settings
+EMAIL_HOST = HOST
+EMAIL_PORT = PORT
+EMAIL_HOST_USER = HOST_USER
+EMAIL_HOST_PASSWORD = HOST_PASSWORD
+EMAIL_USE_TLS = USE_TLS
+# EMAIL_USE_SSL =
