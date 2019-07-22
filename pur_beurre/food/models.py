@@ -38,8 +38,7 @@ class Food(models.Model):
         image = food_requested[0].url_picture
         categories = food_requested[0].categories.all()
         if len(categories) == 0:
-            error= ["Pas d'aliment substitut"]
-            return [error, name_product, image]
+            return [["Pas d'aliment substitut"], name_product, image]
         category_id = categories[0].id
         category_get = Category.objects.filter(pk=category_id)
         substitutes_ordered = category_get[0].food_set.all().order_by('nutriscore')

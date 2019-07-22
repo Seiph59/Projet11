@@ -21,7 +21,7 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            messages.success(request, ('Please confirm your email to complete your registration'))
+            messages.success(request, ("Merci de bien vouloir confirmer votre compte avec l'email reçu"))
             user = form.save()
             user.is_active = True
             current_site = get_current_site(request)

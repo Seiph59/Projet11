@@ -1,6 +1,11 @@
 """ Test file dedicated to test views """
+from django.core import mail
 from django.test import TestCase
+from accounts.models import Profile
+from accounts import views
 from django.contrib.auth.models import User
+from accounts.tokens import account_activation_token
+from django.contrib import messages
 
 
 class RedirectTest(TestCase):
@@ -34,3 +39,26 @@ class RedirectTest(TestCase):
                                                 'password': 'kevin1234'})
         self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed('welcome/index.html')
+
+class EmailTest(TestCase):
+    """Test to check if the email is sent
+    when the user Sign up"""
+
+    def setUp(self):
+        self.client.post('/register/', {'username': 'seiph',
+                                        'first_name': 'Jean',
+                                        'last_name': 'Robert',
+                                        'email': 'jbr@aol.com',
+                                        'password1': 'kevin1234',
+                                        'password2': 'kevin1234'})
+
+    def test_if_confirmation_email_is_sent(self):
+        """ Test if the email is sent and if
+        the subject is the good one"""
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Activez votre compte Pur Beurre')
+
+    def test_if_the_email_is_sent_to_the_new_account(self):
+        """ Test if the email is sent to the right
+        destination """
+        self.assertEqual(mail.outbox[0].to, ['jbr@aol.com'])
