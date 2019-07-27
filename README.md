@@ -1,12 +1,13 @@
-# Projet-8-Django
-Project 8 Openclassrooms, Pur Beurre full stack website, with OpenFoodFacts API
+# Projet-11
+Improve Project 8 Openclassrooms, Pur Beurre full stack website, with OpenFoodFacts API
 
 Link project: https://github.com/Seiph59/Projet-8-Django
-URL address: https://pur-beurre001.herokuapp.com/
+
+#New feature
+* Email confirmation for user accounts
 
 # What is this project ?
-
-This project has for objective to give informations about food choices, using OpenFoodFacts API
+This project has for objective to improve an existing application.
 
 # How ?
 To create this solution, we are going to use, Python 3 , Django, PostgreSQL and OpenFoodfacts API.

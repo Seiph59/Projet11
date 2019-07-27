@@ -40,12 +40,14 @@ __Accounts Application:__
 * Integration tests -> Client test to create User or User already exists
 * Urls tests
 * Redirection tests
+* Email send
 
 __Food Application:__
 * Mock tests for populate_db part
 * Unit test for products insertion
 * Url resolve tests
 * Models tests and to add favorite food into the favorite of the current user
+* 'Get_substitute' method
 
 ### Features not be tested
 * If OpenFoodFacts API is available
