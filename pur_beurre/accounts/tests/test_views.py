@@ -74,18 +74,20 @@ class EmailTest(TestCase):
         self.assertEqual(mail.outbox[0].to, ['jbr@aol.com'])
 
 class AccountTest(TestCase):
-
+    """ Class for test the email is well confirmed when
+    we click on the confirmation link """
     def setUp(self):
         self.client = Client()
 
     def test_if_the_user_confirm_his_account_is_false(self):
+        """ Test if the confirmation email needs to be unique
+        to be confirmed """
         self.client.post('/register/', {'username': 'seiph',
                                         'first_name': 'Jean',
                                         'last_name': 'Robert',
                                         'email': 'jbr@aol.com',
                                         'password1': 'kevin1234',
                                         'password2': 'kevin1234'})
-
 
         user = User.objects.first()
         user_id = user.id
@@ -96,11 +98,17 @@ class AccountTest(TestCase):
         self.assertEqual(profile.email_confirmed, False)
 
     def test_if_the_user_confirm_his_account_(self):
+        """ Test if after the user clicked on the right
+        link, his account is well confirmed"""
         class WrapperMakeToken():
+            """Class which allow us to isolate the token
+            for the test """
             token = ''
             original_make_token = account_activation_token.make_token
 
             def make_token(self, user):
+                """ Class method which allow us to isolate
+                the token generation to re-use on the activation page"""
                 self.token = self.original_make_token(user)
                 return self.token
 
